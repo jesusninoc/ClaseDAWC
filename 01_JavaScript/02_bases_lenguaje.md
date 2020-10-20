@@ -998,6 +998,14 @@ B) Utilizando un if
         sumaOptativa(5);
 ````
 
+C) De forma directa
+
+````
+function funcionDefecto(obligatorio, defecto = "defecto") {
+  console.log(`${obligatorio} ${defecto}`);
+}
+````
+
 
 - Uso de arguments o argumentos invisibles
 
@@ -1014,6 +1022,13 @@ En muchas ocasiones no es necesario pasar argumentos por una función, o no sabe
 
         argumentosInvisibles(1, "llamada", false, 3.14);
 ````
+
+Este uso solo funciona para funciones con construcción normal. En el caso de querer utilizar lo mismo con una función de flecha se trendrían que utilizar el parámetro de array
+
+````
+
+````
+
 
 - Valores de retorno
 
@@ -1033,7 +1048,7 @@ Cuando el llamamiento de una función requiere ademas de ejecutar todo su conten
 ````
 
 
-Cuidado porque los valores de retorno no solo tienen por que ser números, letras o boleados, sino que también pueden ser funciones, como se verá en el siguiente punto.
+Cuidado porque los valores de retorno no solo tienen por que ser números, letras o boleados, sino que también pueden ser funciones, como se verá en el siguiente punto. Una cosa importante es que sobre una función no pueden existir tipos de retorno diferentes
 
 - Funciones anónimas 
 
@@ -1187,5 +1202,113 @@ Adicionalmente se pude utiliza el acceso por posición para ver el contenido de 
 ````
 console.log(objetoCreado['nombre']);
 ````
+
+Al igual que se ha creado el objeto con una cantidad determinada de propiedades y métodos, también es posible crear o eliminar la propiedad de forma dinámica. Para crear la propiedad basta con llamarla e igualarla un valor 
+
+````
+let objeto = {
+  nombre: "Borja",
+  apellido: "Martin",
+  edad: 18,
+  mostraDatos: () => {
+    console.log(objeto.nombre);
+  },
+};
+
+objeto.nuevaEdad = 20;
+````
+
+Para poder eliminarla no basta con igualar la propiedad a null, ya que eso eliminaría el contenido de la propiedad. Para poder eliminar una propiedad hay que utilizar la palabra reservada delete
+
+````
+let objeto = {
+  nombre: "Borja",
+  apellido: "Martin",
+  edad: 18,
+  mostraDatos: () => {
+    console.log(objeto.nombre);
+  },  
+  nuevaEdad: 20,
+};
+
+console.log(objeto);
+delete objeto.edad;
+console.log(objeto);
+````
+
+Otra de las posibilidades que existen a la hora de trabajar con un objeto es la conversión del objeto a formato Array, guardando todos los datos en clave-valor. Para poder hacer esto se ejecuta el método object.entries
+
+````
+console.log(Object.entries(objeto));
+let parClaveValor = Object.entries(objeto);
+parClaveValor.forEach((element) => {
+  console.log(element[0]);
+});
+````
+
+Algunas otras opciones del objeto son freeze, getOwnProperties, values 
+
+### Relación objeto funciones
+
+Como ya se ha visto antes en la parte de la declaración de funciones, estas pueden tener muchas formas tanto en parámetros como en retornos, y adicionalmente tienen una forma de comportarse especial cuando se trata de objetos. Alguna de estas formas son las siguientes
+
+Cuando se quiere crear un objeto desde una función lo primero que se nos puede ocurrir es el siguiente código:
+
+````
+function crearObjeto(param1, param2) {
+  return { nombre: param1, apellido: param2 };
+}
+
+let objeto = crearObjeto("Borja", "Martin");
+console.log(objeto);
+
+````
+
+Sin embargo esto no es del todo necesario siempre que se indique un parámetro que sea el nombre de la propiedad
+
+````
+"use strict";
+
+function crearObjeto(nombre, apellido) {
+  return { nombre, apellido };
+}
+let objeto = crearObjeto("Borja", "Martin");
+console.log(objeto);
+
+````
+
+Otra de las funciones que se permiten en la relación objeto - funciones es la de desectructurar un objetos. En el siguiente ejemplo se crea un método que saca determinadas propiedades
+
+````
+function sacarPropiedades({ nombre, fundacion, estadio }) {
+  console.log(nombre);
+  console.log(fundacion);
+  console.log(estadio);
+}
+````
+
+Es importante darse cuenta que los parámetros que se le pasan no son normales, sino que son en formato objeto (por los {}). A continuación, si se quiere llamar al método, solo tendremos que pasarle un objeto que tenga las propiedades indicadas como parámetros
+
+````
+let equipo = { nombre: "Barcelona", fundacion: 1890, estadio: "CampNou" };
+sacarPropiedades(equipo);
+````
+
+En el caso de intentar llamarlo normal y corriente:
+
+````
+sacarPropiedades("Barcelona", 123, "Camp Nou");
+
+````
+
+Daría un error de tipo undefined
+
+````
+undefined
+undefined
+undefined
+````
+
+
 
 [Volver al inicio](#indice)

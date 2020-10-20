@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z"
+      crossorigin="anonymous"
+    />
+  </head>
+  <script src="./scripts/ejercicio.js"></script>
+  <body>
+    <header style="text-align: center">
+      <h1>Web dinamica con JS</h1>
+    </header>
+
+    <div class="container">
+      <p>
+        El número de hijos totales en el contenedor es de:
+        <b id="hijos_contenedor">0</b>
+      </p>
+
+      <div id="anadir_divs" class="mt-5">
+        <button class="btn btn-primary" id="boton_agregar" disabled>
+          Agregar elemento
+        </button>
+
+        <form>
+          <label for="color_div">Color fondo</label>
+          <input
+            type="color"
+            id="color_div"
+            class="form-control"
+            name="fondo"
+          />
+          <label for="color_fuente_div">Color texto</label>
+          <input
+            type="color"
+            id="color_fuente_div"
+            class="form-control"
+            name="fuente"
+          />
+          <label>Texto del div</label>
+
+          <input
+            type="text"
+            id="texto_div"
+            placeholder="introduce texto div"
+            class="form-control"
+          />
+          <label>Tamaño de fuente</label>
+
+          <input
+            type="range"
+            id="range_tamanio"
+            class="form-control-range"
+            min="6"
+            max="50"
+          />
+        </form>
+      </div>
+
+      <div id="borrar_divs" class="mt-5">
+        <button class="btn btn-primary" id="boton_borrar" disabled>
+          Borrar elemento
+        </button>
+        <select id="select_borrar_div" class="form-control mt-2"></select>
+      </div>
+
+      <div id="info_divs" class="mt-5">
+        <button class="btn btn-primary" id="boton_info" disabled>
+          Informacion elemento
+        </button>
+        <select id="select_info_div" class="form-control mt-2"></select>
+      </div>
+    </div>
+  </body>
+</html>
